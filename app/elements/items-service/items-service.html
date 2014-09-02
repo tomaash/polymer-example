@@ -1,0 +1,29 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="items-service" attributes="">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+      var items = [
+            'HTML5 Boilerplate',
+            'Web Component Polyfills',
+            'Core Elements',
+            'Paper Elements',
+            'Polymer'
+          ];
+      Polymer({
+        ready: function() {
+          this.items = items;
+        }
+      });
+
+    })();
+  </script>
+</polymer-element>

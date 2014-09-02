@@ -1,0 +1,29 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-icons/core-icons.html">
+
+<polymer-element name="user-card" attributes="user current editmode">
+  <template>
+    <link rel="stylesheet" href="user-card.css">
+    <div class="card-header" layout horizontal center>
+      <core-icon class="edit-icon" icon="create" on-click="{{edit}}"></core-icon>
+      <core-icon icon="{{user.icon}}"></core-icon>
+      <h2>{{user.name}}</h2>
+    </div>
+    <h3>{{user.email}}</h3>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+        edit: function() {
+          this.current = this.user;
+          this.editmode = true;
+          console.log(this.user);
+        }
+        // define element prototype here
+      });
+
+    })();
+  </script>
+</polymer-element>

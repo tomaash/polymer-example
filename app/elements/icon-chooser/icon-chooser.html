@@ -1,0 +1,40 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-icons/core-icons.html">
+<polymer-element name="icon-chooser" attributes="object">
+  <template>
+    <link rel="stylesheet" href="icon-chooser.css">
+    <div class="chooser">
+      <template repeat="{{ icon in icons }}">
+        <core-icon
+        icon="{{icon}}"
+        on-click="{{choose}}"
+        class="{{ {'selected' : object.icon == icon} | tokenList }}"
+        ></core-icon>
+      </template>
+    </div>
+  </template>
+  <script>
+(function () {
+  'use strict';
+
+  Polymer({
+    ready: function() {
+      this.icons = [
+      "accessibility",
+      "cloud",
+      "attachment",
+      "android",
+      "bug-report",
+      "gesture",
+      "favorite",
+      "visibility"
+      ];
+    },
+    choose: function(e, detail, sender) {
+      this.object.icon = sender.icon;
+    }
+  });
+
+})();
+</script>
+</polymer-element>

@@ -1,0 +1,31 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-menu/core-menu.html">
+<link rel="import" href="../../bower_components/core-item/core-item.html">
+<link rel="import" href="../../bower_components/core-pages/core-pages.html">
+<link rel="import" href="../../bower_components/flatiron-director/flatiron-director.html">
+
+<polymer-element name="sb-menu" attributes="items route">
+  <template>
+    <link rel="stylesheet" href="sb-menu.css">
+    <core-menu theme="core-light-theme">
+      <template repeat="{{ item in items }}">
+        <core-item icon="{{ item.icon }}" label="{{ item.label }}"
+          active?="{{route == item.hash}}"
+          class="{{ {'core-selected' : route == item.hash} | tokenList }}">
+          <a href="/#{{item.hash}}"></a>
+        </core-item>
+      </template>
+    </core-menu>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+      Polymer({
+        routeChanged: function () {
+          console.log("Autolistener!" + this.route);
+        }
+      });
+
+    })();
+  </script>
+</polymer-element>

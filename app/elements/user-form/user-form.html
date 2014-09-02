@@ -1,0 +1,37 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../elements/icon-chooser/icon-chooser.html">
+
+<polymer-element name="user-form" attributes="user collection editmode">
+  <template>
+    <link rel="stylesheet" href="user-form.css">
+    <div class="form">
+      <h1>{{editmode ? "Edit User" : "Add user"}}</h1>
+      <paper-input floatinglabel label="Name" value="{{user.name}}"></paper-input>
+      <br/>
+      <paper-input floatinglabel label="Email" value="{{user.email}}"></paper-input>
+      <br/>
+      <icon-chooser object="{{user}}"></icon-chooser>
+      <br/>
+      <paper-button on-click="{{submit}}" raisedButton label="{{editmode ? 'Update' : 'Create'}}"></paper-button>
+    </div>
+  </template>
+  <script>
+(function () {
+  'use strict';
+
+  Polymer({
+    ready: function() {
+      this.user = {};
+    },
+    submit: function() {
+      if (!this.editmode) {
+        this.collection.push(this.user);
+      }
+      this.user = {};
+      this.editmode = false;
+    }
+  });
+
+})();
+</script>
+</polymer-element>

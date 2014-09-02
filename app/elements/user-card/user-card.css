@@ -1,0 +1,22 @@
+:host {
+	display: block;
+	background: white;
+	padding: 20px;
+	margin: 10px;
+	width: 300px;
+	position: relative;
+}
+
+.card-header core-icon {
+	margin-right: 20px;
+	width: 64px;
+	height: 64px;
+}
+
+core-icon.edit-icon {
+	position: absolute;
+	right: 0px;
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+}

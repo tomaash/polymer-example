@@ -1,0 +1,48 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="sb-model" attributes="">
+  <script>
+    (function () {
+      'use strict';
+      var items = [
+            'HTML5 Boilerplate',
+            'Web Component Polyfills',
+            'Core Elements',
+            'Paper Elements',
+            'Polymer'
+          ];
+
+      var bind = {};
+
+      var route = {};
+
+      var editmode = false;
+
+      var menuItems = [
+        {icon: 'settings', hash: 'users', label: 'Users'},
+        {icon: 'book', hash: 'tasks', label: 'Tasks'},
+        {icon: 'settings', hash: 'projects', label: 'Projects'}
+      ];
+
+      var users = [
+        {name: 'Da Mister Foo', email:'foo@foo.cz', icon: 'android'},
+        {name: 'Le Bar Man', email:'bar@bar.cz', icon: 'bug-report'}
+      ];
+      var tasks = [];
+      var projects = [];
+
+      Polymer({
+        ready: function() {
+          this.items = items;
+          this.menuItems = menuItems;
+          this.route = route;
+          this.bind = bind;
+          this.users = users;
+          this.tasks = tasks;
+          this.projects = projects;
+          this.editmode = editmode;
+        }
+      });
+    })();
+  </script>
+</polymer-element>

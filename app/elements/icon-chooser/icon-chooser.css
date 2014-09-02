@@ -1,0 +1,14 @@
+:host {
+  display: block;
+
+}
+
+.chooser core-icon {
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.chooser core-icon.selected {
+	background: white;
+}
+

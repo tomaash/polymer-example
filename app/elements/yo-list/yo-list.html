@@ -1,0 +1,33 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../sb-model/sb-model.html">
+
+<polymer-element name="yo-list"  attributes="">
+  <template>
+    <link rel="stylesheet" href="yo-list.css">
+    <sb-model id="model"></sb-model>
+    <!-- <flatiron-director route="{{route}}"></flatiron-director> -->
+    <ul>
+      <template id="greeting" repeat="{{ item in model.items }}">
+        <li>{{ item }}</li>
+      </template>
+    </ul>
+    <p>{{model.bind.route}}</p>
+    <button on-click="{{test}}">Test</button>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+        ready: function() {
+          this.model = this.$.model;
+        },
+        test: function(e) {
+          console.log(e);
+          console.log(this.$.model.bind);
+        }
+      });
+
+    })();
+  </script>
+</polymer-element>
