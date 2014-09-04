@@ -1,18 +1,22 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../elements/icon-chooser/icon-chooser.html">
 
-<polymer-element name="user-form" attributes="user collection editmode">
+<polymer-element name="user-form" attributes="currentuser collection">
   <template>
     <link rel="stylesheet" href="user-form.css">
     <div class="form">
-      <h1>{{editmode ? "Edit User" : "Add user"}}</h1>
+      <h1>{{currentuser ? "Edit User" : "Add user"}}</h1>
       <paper-input floatinglabel label="Name" value="{{user.name}}"></paper-input>
       <br/>
       <paper-input floatinglabel label="Email" value="{{user.email}}"></paper-input>
       <br/>
       <icon-chooser object="{{user}}"></icon-chooser>
       <br/>
-      <paper-button on-click="{{submit}}" raisedButton label="{{editmode ? 'Update' : 'Create'}}"></paper-button>
+      <paper-button class="save" on-click="{{submit}}" raisedButton label="{{currentuser ? 'Update' : 'Create'}}"></paper-button>
+      <template if="{{currentuser}}">
+        <paper-button class="delete" on-click="{{delete}}" raisedButton label="Delete"></paper-button>
+        <paper-button class="cancel" on-click="{{stopEdit}}" raisedButton label="Cancel"></paper-button>
+      </template>
     </div>
   </template>
   <script>
@@ -23,13 +27,36 @@
     ready: function() {
       this.user = {};
     },
+
+    currentuserChanged: function() {
+      this.user = JSON.parse(JSON.stringify(this.currentuser)) || {};
+    },
+
     submit: function() {
-      if (!this.editmode) {
+      if (!this.currentuser) {
         this.collection.push(this.user);
+      } else {
+        for (var key in this.user) {
+          this.currentuser[key] = this.user[key];
+        }
       }
+      this.stopEdit();
+    },
+
+    delete: function() {
+      var idx = this.collection.indexOf(this.currentuser);
+      if (idx > -1) {
+        this.collection.splice(idx, 1);
+      }
+      this.stopEdit();
+    },
+
+    stopEdit: function(){
       this.user = {};
-      this.editmode = false;
+      this.currentuser = null;
     }
+
+
   });
 
 })();

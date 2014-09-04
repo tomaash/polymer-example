@@ -7,9 +7,7 @@
 <link rel="import" href="../../elements/yo-greeting/yo-greeting.html">
 <link rel="import" href="../../elements/yo-list/yo-list.html">
 <link rel="import" href="../../elements/sb-menu/sb-menu.html">
-<link rel="import" href="../../elements/user-card/user-card.html">
-
-<link rel="import" href="../../elements/user-form/user-form.html">
+<link rel="import" href="../../elements/user-page/user-page.html">
 
 <polymer-element name="sb-main" attributes="">
   <template>
@@ -26,22 +24,22 @@
 
       <div tool>Title</div>
       <div class="content">
-        <!-- <div>The route is: {{model.route.path}}</div>
-      -->
       <template if="{{!model.route.path || model.route.path == 'home'}}">
         <h1>Welcome!</h1>
       </template>
 
       <template if="{{model.route.path == 'users'}}">
-        <div horizontal layout wrap>
-          <user-form user="{{currentUser}}" editmode="{{editmode}}" collection="{{model.users}}"></user-form>
+      <user-page users="{{model.users}}"></user-page>
+
+<!--         <div horizontal layout wrap>
+          <user-form currentuser="{{currentUser}}" editmode="{{editmode}}" collection="{{model.users}}"></user-form>
           <div class="list">
             <template repeat="{{ user in model.users }}">
               <user-card user="{{user}}" editmode="{{editmode}}" current="{{currentUser}}"></user-card>
             </template>
           </div>
         </div>
-      </template>
+ -->      </template>
 
       <template if="{{model.route.path == 'bar'}}">
         <div hash="bar">bar page</div>
@@ -61,7 +59,6 @@
       Polymer({
         ready: function() {
           this.model = this.$.model;
-          // this.user = {};
         },
         routeChanged: function(e) {
           if (e && e.detail) {

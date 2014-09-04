@@ -1,0 +1,27 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../elements/user-card/user-card.html">
+<link rel="import" href="../../elements/user-form/user-form.html">
+
+<polymer-element name="user-page" attributes="users">
+  <template>
+    <link rel="stylesheet" href="user-page.css">
+    <div horizontal layout wrap>
+      <user-form currentuser="{{currentUser}}" editmode="{{editmode}}" collection="{{users}}"></user-form>
+      <div class="list">
+        <template repeat="{{ user in users }}">
+          <user-card user="{{user}}" editmode="{{editmode}}" current="{{currentUser}}"></user-card>
+        </template>
+      </div>
+    </div>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+        // define element prototype here
+      });
+
+    })();
+  </script>
+</polymer-element>
