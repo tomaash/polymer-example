@@ -8,6 +8,7 @@
 <link rel="import" href="../../elements/yo-list/yo-list.html">
 <link rel="import" href="../../elements/sb-menu/sb-menu.html">
 <link rel="import" href="../../elements/user-page/user-page.html">
+<link rel="import" href="../../elements/sb-calculator/sb-calculator.html">
 
 <polymer-element name="sb-main" attributes="">
   <template>
@@ -19,40 +20,46 @@
         <core-toolbar>
           <a href="/#home">Application</a>
         </core-toolbar>
-        <sb-menu items="{{ model.menuItems }}" route="{{ model.route.path }}"></sb-menu>
+        <sb-menu items="{{ model.menuItems }}" route="{{ route }}"></sb-menu>
       </core-header-panel>
 
       <div tool>Title</div>
       <div class="content">
-      <template if="{{!model.route.path || model.route.path == 'home'}}">
-        <h1>Welcome!</h1>
-      </template>
+        <template if="{{!route || route == 'home'}}">
+          <h1>Welcome!</h1>
+        </template>
 
-      <template if="{{model.route.path == 'users'}}">
-      <user-page users="{{model.users}}"></user-page>
+        <template if="{{route == 'users'}}">
+          <user-page users="{{model.users}}"></user-page>
+        </template>
 
-<!--         <div horizontal layout wrap>
-          <user-form currentuser="{{currentUser}}" editmode="{{editmode}}" collection="{{model.users}}"></user-form>
-          <div class="list">
-            <template repeat="{{ user in model.users }}">
-              <user-card user="{{user}}" editmode="{{editmode}}" current="{{currentUser}}"></user-card>
-            </template>
+        <template if="{{route == 'card'}}">
+          <user-card user="{{ {name:'foo', email:'bar', icon:'android'} }}" current="{{testCurrent}}"></user-card>
+          <input type="text" value="{{testCurrent.name}}"><br>
+        </template>
+
+        <template if="{{route == 'icons'}}">
+          <icon-chooser object="{{iconHolder}}"></icon-chooser>
+          <br/>
+          <core-icon icon="{{iconHolder.icon}}"></core-icon>
+        </template>
+
+        <template if="{{route == 'calculator'}}">
+          <sb-calculator></sb-calculator>
+        </template>
+
+        <template if="{{route == 'bar'}}">
+          <div hash="bar">bar page</div>
+          <div class="hero-unit" >
+            <yo-greeting></yo-greeting>
+            <p>You now have</p>
+            <yo-list></yo-list>
           </div>
-        </div>
- -->      </template>
-
-      <template if="{{model.route.path == 'bar'}}">
-        <div hash="bar">bar page</div>
-        <div class="hero-unit" >
-          <yo-greeting></yo-greeting>
-          <p>You now have</p>
-          <yo-list></yo-list>
-        </div>
-      </template>
-    </div>
-  </core-scaffold>
-</template>
-<script>
+        </template>
+      </div>
+    </core-scaffold>
+  </template>
+  <script>
     (function () {
       'use strict';
 

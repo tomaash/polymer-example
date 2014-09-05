@@ -1,0 +1,62 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+<polymer-element name="sb-calculator" attributes="">
+  <template>
+    <link rel="stylesheet" href="sb-calculator.css">
+    <span class="result">{{result || "0"}}</span>
+    <div horizontal layout>
+
+      <div vertical layout>
+        <template repeat="{{ y in [0,3,6] }}">
+          <div horizontal layout>
+            <template repeat="{{ x in [1,2,3] }}">
+              <paper-button class="num" on-click="{{number}}" raisedButton label="{{ x + y }}"></paper-button>
+            </template>
+          </div>
+        </template>
+        <div horizontal layout>
+          <paper-button class="num" on-click="{{number}}" raisedButton label="0"></paper-button>
+          <paper-button class="num" on-click="{{equals}}" raisedButton label="="></paper-button>
+          <paper-button class="num" on-click="{{ready}}" raisedButton label="C"></paper-button>
+        </div>
+      </div>
+      <div vertical layout>
+        <template repeat="{{ op in ['+', '-', '*', '/'] }}">
+          <paper-button class="num" on-click="{{operation}}" raisedButton label="{{op}}"></paper-button>
+        </template>
+      </div>
+    </div>
+  </template>
+  <script>
+  (function () {
+    'use strict';
+
+    Polymer({
+      ready: function() {
+        this.result = "";
+        this.carry = "";
+        this.op = "";
+      },
+      number: function(e, details, target) {
+        if (this.result.length < 10) {
+         this.result = target.label + this.result;
+        }
+      },
+      operation: function(e, details, target) {
+        this.op = target.label;
+        this.carry = this.result;
+        this.result = "";
+      },
+      equals: function() {
+        if (this.op) {
+          this.result = eval(this.carry + this.op + this.result);
+          this.op = "";
+          this.carry = "";
+        }
+      }
+    });
+
+  })();
+  </script></polymer-element>
